@@ -1,0 +1,33 @@
+.paginator {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 42px;
+    height: 42px;
+    padding: 10px;
+    border: 1px solid #fe5f1e;
+    border-radius: 21px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(254, 95, 30);
+      color: white;
+    }
+  }
+  .selected {
+    background-color: #fe5f1e;
+    color: white;
+  }
+  :global {
+    .previous {
+      
+    }
+  }
+
+}
