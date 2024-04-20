@@ -19,6 +19,11 @@ const Search = () => {
         /*dispatch(setSearch(e.target.value))*/
     }
 
+    const onClearClick = () => {
+        dispatch(clearSearch())
+        setValue('')
+    }
+
     useEffect(() => {
         if (debounceSearch !== search) {
             dispatch(setSearch(debounceSearch))
@@ -33,7 +38,7 @@ const Search = () => {
                 placeholder={'Найти пиццу...'}
             />
             <img className={styles.searchIcon} src={`${process.env.PUBLIC_URL}/search.png`}/>
-            {search && <img onClick={() => dispatch(clearSearch())} className={styles.closeIcon}
+            {search && <img onClick={() => onClearClick()} className={styles.closeIcon}
                             src={`${process.env.PUBLIC_URL}/close.svg`}/>}
         </div>
     );

@@ -29,7 +29,6 @@ const filterSlice = createSlice({
             state.order = state.order === 'asc' ? 'desc' : 'asc'
         },
         setSearch(state, action){
-            debugger
             state.search = action.payload
         },
         clearSearch(state){

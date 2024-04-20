@@ -13,13 +13,13 @@ import Paginator from "../components/Paginator/Paginator";
 import {useDispatch, useSelector} from "react-redux";
 import {setOrder, setParams} from "../Redux/Slices/filterSlice";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {fetchPizzas} from "../Redux/Slices/pizzasSlice";
 
 
 const Home = () => {
     const navigate = useNavigate()
 
-    const [pizzas, setPizzas] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(0)
     const isSearch = useRef(false)
     const isMounting = useRef(false)
@@ -30,37 +30,38 @@ const Home = () => {
     const sort = useSelector((state) => state.filters.sort)
     const order = useSelector((state) => state.filters.order)
     const search = useSelector(state => state.filters.search)
+    const pizzas = useSelector(state => state.pizzas.pizzas)
+    const fetchStatus = useSelector(state => state.pizzas.status)
 
-    const fetchPizza = () => {
+    /*const fetchPizza = async () => {
         setIsLoading(true)
-        fetch(`https://65d37906522627d50108f9e4.mockapi.io/pizzas?p=${currentPage + 1}&l=${4}&${category ? `category=${category}` : ''}${sort ? `&sortBy=${sort}` : ''}${order ? `&order=${order}` : ''}${search ? `&search=${search}` : ''}`)
-            .then((response) => {
-                return response.json()
-            })
-            .then(
-                (json) => {
-                    setPizzas(json)
-                    setIsLoading(false)
-                }
-            )
-    }
+        try {
+            const response = await axios.get(`https://65d37906522627d50108f9e4.mockapi.io/pizzas?p=${currentPage + 1}&l=${4}&${category ? `category=${category}` : ''}${sort ? `&sortBy=${sort}` : ''}${order ? `&order=${order}` : ''}${search ? `&search=${search}` : ''}`)
+            setPizzas(response.data)
+            setError('')
+        } catch(err) {
+            console.log(err.message)
+            setError(err.message)
+        } finally {
+            setIsLoading(false)
+        }
+    }*/
 
     const handelOrderClick = () => {
         dispatch(setOrder())
     }
 
 
-
-
     useEffect(() => {
         if (!isSearch.current) {
-            fetchPizza()
+            /*fetchPizza()*/
+            dispatch(fetchPizzas({currentPage, category, sort, order, search}))
         }
-       isSearch.current = false
+        isSearch.current = false
     }, [category, sort, order, search, currentPage])
 
     useEffect(() => {
-        if(window.location.search) {
+        if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1))
             console.log(params)
             dispatch(setParams(params))
@@ -90,9 +91,9 @@ const Home = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {pizzas.length > 0 || isSearch.current ? (isLoading ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
-                        : pizzas.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)) :
-                    <b>Поиск не дал результатов :(</b>}
+                {fetchStatus === 'pending' ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
+                    : fetchStatus === 'error' ? <b>Поиск не дал результатов :(</b>
+                        : pizzas.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
             </div>
             <Paginator currentPage={currentPage} setCurrentPage={setCurrentPage}/>
         </div>
