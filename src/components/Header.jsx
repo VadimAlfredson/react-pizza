@@ -1,13 +1,15 @@
 import React from 'react';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Search from "./Search/Search";
 import {useSelector} from "react-redux";
 const Header = () => {
 
     const sumPrice = useSelector(state => state.cart.price)
     const totalCountCart = useSelector(state => state.cart.count)
+
+    const {pathname} = useLocation()
 
 
 
@@ -25,7 +27,7 @@ const Header = () => {
             <Search />
             <Link to={'/cart'}>
             <div className="header__cart">
-                <a href="/cart.html" className="button button--cart">
+                {pathname !== '/cart' && <a href="/cart.html" className="button button--cart">
                     <span>{sumPrice} ₽</span>
                     <div className="button__delimiter"></div>
                     <svg
@@ -58,7 +60,7 @@ const Header = () => {
                         />
                     </svg>
                     <span>{totalCountCart}</span>
-                </a>
+                </a>}
             </div>
             </Link>
         </div>
