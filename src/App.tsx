@@ -7,7 +7,6 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./Pages/Home";
 import NotFount from "./Pages/NotFount";
 import Cart from "./Pages/Cart";
-import {useState} from "react";
 
 
 
