@@ -19,7 +19,7 @@ export type PizzaItemType = {
     name: string,
     types: Array<number>,
     sizes: Array<number>,
-    price: number,
+    price: Array<number>,
     category: number,
     rating: number
 }
@@ -49,8 +49,8 @@ const cartSlice = createSlice({
                 console.log(action.payload)
                 state.items.push(action.payload)
             }
-            state.price = state.items.reduce((acc, pizza) => pizza.price*pizza.count + acc, 0)
-            state.count = state.items.reduce((acc, pizza) => pizza.count + acc, 0)
+            state.price += action.payload.price
+            state.count += 1
         },
 
         increment(state, action:PayloadAction<PayloadPizzaType>) {
@@ -58,18 +58,16 @@ const cartSlice = createSlice({
             if (findPizza) {
                 findPizza.count += 1
             }
-
-            state.price = state.items.reduce((acc, pizza) => pizza.price*pizza.count + acc, 0)
-            state.count = state.items.reduce((acc, pizza) => pizza.count + acc, 0)
+            state.price += action.payload.price
+            state.count += 1
         },
         decrement(state, action:PayloadAction<PayloadPizzaType>) {
             const findPizza = state.items.find(item => item.id === action.payload.id && item.size === action.payload.size && item.type === action.payload.type)
             if (findPizza) {
                 findPizza.count > 1 ? findPizza.count -= 1 : state.items = state.items.filter(item => item.id !== action.payload.id || item.size !== action.payload.size || item.type !== action.payload.type)
             }
-
-            state.price = state.items.reduce((acc, pizza) => pizza.price*pizza.count + acc, 0)
-            state.count = state.items.reduce((acc, pizza) => pizza.count + acc, 0)
+            state.price -= action.payload.price
+            state.count -= 1
         },
         removeItem(state, action:PayloadAction<PayloadPizzaType>) {
             state.items = state.items.filter(item => item.id !== action.payload.id || item.size !== action.payload.size || item.type !== action.payload.type)
