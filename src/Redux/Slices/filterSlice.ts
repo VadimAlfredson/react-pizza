@@ -6,7 +6,6 @@ type FilterStateType = {
     sort: 'rating' | 'price' | 'name',
     order: 'asc' | 'desc',
     search: string,
-    currentPage: number
 }
 
 const initialState: FilterStateType = {
@@ -14,7 +13,6 @@ const initialState: FilterStateType = {
     sort: 'rating',
     order: 'asc',
     search: '',
-    currentPage: 1
 }
 
 const filterSlice = createSlice({
@@ -41,10 +39,9 @@ const filterSlice = createSlice({
         clearSearch(state){
             state.search = ''
         },
-        setParams(state, action: PayloadAction<{category: number, sort: 'rating' | 'price' | 'name', currentPage: number}>){
+        setParams(state, action: PayloadAction<{category: number, sort: 'rating' | 'price' | 'name'}>){
             state.category = Number(action.payload.category)
             state.sort = action.payload.sort
-            state.currentPage = Number(action.payload.currentPage)
         }
     },
 })

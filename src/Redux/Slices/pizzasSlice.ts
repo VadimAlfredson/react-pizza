@@ -2,11 +2,15 @@ import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} f
 import axios from "axios";
 import {PizzaItemType} from "./cartSlice";
 import {AppDispatch, RootState} from "../Store";
+import {Pagination} from "../../utils/Pagination";
 
 
 type PizzasStateType = {
     pizzas: Array<PizzaItemType>,
-    status: 'pending' | 'success' | 'error'
+    status: 'pending' | 'success' | 'error',
+    pizzasToCurrentPage: Array<PizzaItemType>,
+    currentPage: number,
+    totalCount: number
 }
 
 export type ThunkArgumentsType = {
@@ -14,8 +18,6 @@ export type ThunkArgumentsType = {
     sort: 'rating' | 'price' | 'name',
     order: 'asc' | 'desc',
     search?: string,
-    l?: number,
-    currentPage: number
 }
 
 
@@ -28,13 +30,11 @@ type ThunkApiConfig = {
 
 export const fetchPizzas = createAsyncThunk<Array<PizzaItemType>, ThunkArgumentsType, ThunkApiConfig>(
     'pizzas/fetchPizzasStatus',
-    async ({currentPage, category, sort, order, search}) => {
-        const { data }: { data: Array<PizzaItemType> } = await axios({
+    async ({category, sort, order, search}) => {
+        const {data}: { data: Array<PizzaItemType> } = await axios({
             method: 'GET',
             url: `https://65d37906522627d50108f9e4.mockapi.io/pizzas`,
             params: {
-                p: currentPage + 1,
-                l: 8,
                 category: category ? category : null,
                 sortBy: sort,
                 order: order,
@@ -47,13 +47,22 @@ export const fetchPizzas = createAsyncThunk<Array<PizzaItemType>, ThunkArguments
     }
 )
 
-const initialState: PizzasStateType = {pizzas: [], status: 'pending'}
+const initialState: PizzasStateType = {
+    pizzas: [],
+    status: 'pending',
+    pizzasToCurrentPage: [],
+    currentPage: 1,
+    totalCount: 1
+}
 
 const pizzasSlice = createSlice({
     name: 'pizzas',
     initialState,
     reducers: {
-        add: (state) => state
+        getPizzasToPage: (state, action: PayloadAction<number>) => {
+            state.pizzasToCurrentPage = Pagination(state.pizzas, action.payload)
+            state.currentPage = action.payload
+        }
     },
     extraReducers: (builder: ActionReducerMapBuilder<PizzasStateType>) => {
         builder
@@ -61,17 +70,26 @@ const pizzasSlice = createSlice({
                 fetchPizzas.fulfilled, (state, action) => {
                     state.pizzas = action.payload
                     state.status = 'success'
+                    state.pizzasToCurrentPage = Pagination(action.payload, 1)
+                    state.currentPage = 1
+                    state.totalCount = Math.ceil(action.payload.length / 8)
                 })
             .addCase(fetchPizzas.pending, (state) => {
                 state.status = 'pending'
                 state.pizzas = []
+                state.pizzasToCurrentPage = []
+                state.currentPage = 1
+                state.totalCount = 1
             })
             .addCase(fetchPizzas.rejected, (state) => {
                 state.status = 'error'
                 state.pizzas = []
+                state.pizzasToCurrentPage = []
+                state.currentPage = 1
+                state.totalCount = 1
             })
     }
 })
 
-export const {} = pizzasSlice.actions
+export const {getPizzasToPage} = pizzasSlice.actions
 export default pizzasSlice

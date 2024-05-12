@@ -1,20 +1,16 @@
 import React from 'react';
-import ReactPaginate from "react-paginate";
 import style from './Paginator.module.scss'
-import {useAppSelector} from "../../types/types";
+import {useAppDispatch, useAppSelector} from "../../types/types";
+import {getPizzasToPage} from "../../Redux/Slices/pizzasSlice";
 
-const Paginator: React.FC<{currentPage: number, setCurrentPage: (i: number) => void}> = (props) => {
+const Paginator: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const currentPage = useAppSelector(state => state.pizzas.currentPage)
+    const totalCount = useAppSelector(state => state.pizzas.totalCount)
     return (
-        <ReactPaginate
-            className={style.paginator}
-            pageCount={3}
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={(e) => props.setCurrentPage(e.selected)}
-            pageRangeDisplayed={8}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-        />
+        <div className={style.paginator}>
+            {[...new Array(totalCount)].map((page, index) => <a onClick={() => dispatch(getPizzasToPage(index + 1))} className={index + 1 === currentPage && style.selected} key={index + 1}>{index + 1}</a>)}
+        </div>
     );
 };
 

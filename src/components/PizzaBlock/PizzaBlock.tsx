@@ -44,7 +44,7 @@ const PizzaBlock: React.FC<PizzaItemType> = ({id, imageUrl, name, types, sizes, 
             /> : <div style={{width: 260, height: 260, borderRadius: 130, backgroundColor: "grey"}}>Изображение отсутствет</div>}
                 <h4 className="pizza-block__title">{name}</h4></NavLink>
             <div className="pizza-block__selector">
-                <ul>{types.map((type, index) => <li className={activeType === index ? 'active' : ''} key={index} onClick={() => setActiveType(index)}>{typesName[index]}</li>)}</ul>
+                <ul>{types.map((type, index) => <li className={activeType === index ? 'active' : ''} key={index} onClick={() => setActiveType(index)}>{typesName[Number(type)]}</li>)}</ul>
                 <ul>{sizes.map((size, index) => <li className={activeSize === index ? 'active' : ''} key={index} onClick={() => setActiveSize(index)}>{size} см.</li>)}</ul>
             </div>
             <div className="pizza-block__bottom">

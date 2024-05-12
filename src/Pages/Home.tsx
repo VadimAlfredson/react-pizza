@@ -18,11 +18,9 @@ import {fetchPizzas, ThunkArgumentsType} from "../Redux/Slices/pizzasSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 
 
-
 const Home: React.FC = () => {
     const navigate = useNavigate()
 
-    const [currentPage, setCurrentPage] = useState<number>(0)
     const isSearch = useRef<boolean>(false)
     const isMounting = useRef<boolean>(false)
 
@@ -32,9 +30,9 @@ const Home: React.FC = () => {
     const sort = useAppSelector((state) => state.filters.sort)
     const order = useAppSelector((state) => state.filters.order)
     const search = useAppSelector(state => state.filters.search)
-    const pizzas = useAppSelector(state => state.pizzas.pizzas)
+    const pizzas = useAppSelector(state => state.pizzas.pizzasToCurrentPage)
     const fetchStatus = useAppSelector(state => state.pizzas.status)
-
+    const currentPage = useAppSelector(state => state.pizzas.currentPage)
     const handelOrderClick: () => void = () => {
         dispatch(setOrder())
     }
@@ -43,10 +41,10 @@ const Home: React.FC = () => {
     useEffect(() => {
         if (!isSearch.current) {
             /*fetchPizza()*/
-            dispatch(fetchPizzas({currentPage, category, sort, order, search}))
+            dispatch(fetchPizzas({category, sort, order, search}))
         }
         isSearch.current = false
-    }, [category, sort, order, search, currentPage])
+    }, [category, sort, order, search])
 
     useEffect(() => {
         if (window.location.search) {
@@ -83,7 +81,7 @@ const Home: React.FC = () => {
                     : fetchStatus === 'error' ? <b>Поиск не дал результатов :(</b>
                         : pizzas.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
             </div>
-            <Paginator currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Paginator/>
         </div>
     </>
 };

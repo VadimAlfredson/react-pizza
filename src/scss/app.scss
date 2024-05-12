@@ -32,7 +32,12 @@ body {
   }
 
   &__items {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    /*display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 11px;
@@ -47,7 +52,7 @@ body {
 
     @media (max-width: 730px) {
       grid-template-columns: repeat(1, 1fr);
-    }
+    }*/
   }
   &__top {
     display: flex;
