@@ -1,26 +1,11 @@
 import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from "axios";
-import {PizzaItemType} from "./cartSlice";
+import {PizzaItemType, PizzaType} from "./cartSlice";
 import {AppDispatch, RootState} from "../Store";
 
 
-type InfoPizzaType = {
-    id: number,
-    imageUrl: string,
-    name: string,
-    type: Array<number>,
-    size: Array<number>,
-    price: number,
-    category: number,
-    rating: number,
-    info: string,
-    ingredients: Array<string>,
-    specialStatus: Array<string>
-
-}
-
 type InfoPizzaStateType = {
-    infoPizza: InfoPizzaType,
+    infoPizza: PizzaItemType,
     status: 'pending' | 'success' | 'error'
 }
 
@@ -32,10 +17,10 @@ type ThunkApiConfig = {
     extra: any
 }
 
-export const fetchInfoPizza = createAsyncThunk<InfoPizzaType, string, ThunkApiConfig>(
+export const fetchInfoPizza = createAsyncThunk<PizzaItemType, string | undefined, ThunkApiConfig>(
     'pizzaInfo/fetchPizzaInfo',
-    async (id: string) => {
-        const {data} = await axios({
+    async (id: string | undefined) => {
+        const { data }: {data: PizzaItemType} = await axios({
             method: 'GET',
             url: `https://65d37906522627d50108f9e4.mockapi.io/pizzas/${id}`,
         })
@@ -48,14 +33,14 @@ const initialState: InfoPizzaStateType = {
         id: 0,
         imageUrl: '',
         name: '',
-        type: [],
-        size: [],
-        price: 0,
+        types: [],
+        sizes: [],
+        price: [],
         category: 0,
         rating: 0,
+        ingredients: [],
+        specialStatus: [],
         info: '',
-        ingredients: [''],
-        specialStatus: ['']
     },
     status: 'pending'
 }
@@ -69,9 +54,9 @@ const pizzasSlice = createSlice({
                 id: 0,
                 imageUrl: '',
                 name: '',
-                type: [],
-                size: [],
-                price: 0,
+                types: [],
+                sizes: [],
+                price: [],
                 category: 0,
                 rating: 0,
                 info: '',
@@ -83,7 +68,7 @@ const pizzasSlice = createSlice({
     extraReducers: (builder: ActionReducerMapBuilder<InfoPizzaStateType>) => {
         builder
             .addCase(
-                fetchInfoPizza.fulfilled, (state, action: PayloadAction<InfoPizzaType>) => {
+                fetchInfoPizza.fulfilled, (state, action: PayloadAction<PizzaItemType>) => {
                     state.infoPizza = {...action.payload}
                     state.status = 'success'
                 })
@@ -96,14 +81,14 @@ const pizzasSlice = createSlice({
                     id: 0,
                     imageUrl: '',
                     name: '',
-                    type: [],
-                    size: [],
-                    price: 0,
+                    types: [],
+                    sizes: [],
+                    price: [],
                     category: 0,
                     rating: 0,
-                    info: '',
                     ingredients: [],
-                    specialStatus: []
+                    specialStatus: [],
+                    info: '',
                 }
             })
     }

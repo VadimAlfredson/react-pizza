@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPaginate from "react-paginate";
 import style from './Paginator.module.scss'
+import {useAppSelector} from "../../types/types";
 
 const Paginator: React.FC<{currentPage: number, setCurrentPage: (i: number) => void}> = (props) => {
     return (

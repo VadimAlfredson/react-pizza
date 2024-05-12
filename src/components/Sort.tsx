@@ -19,8 +19,7 @@ const Sort: React.FC<{Order: () => void}> = (props) => {
 
     useEffect(() => {
         const handelClickSortRef = (event: MouseEvent) => {
-            if (!event.composedPath().includes(sortRef.current)){
-                console.log('ref: ' + sortRef.current)
+            if (!event.composedPath().includes(sortRef.current as HTMLDivElement)){
                 setOpen(false)
             }
         }

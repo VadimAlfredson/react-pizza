@@ -29,18 +29,19 @@ type ThunkApiConfig = {
 export const fetchPizzas = createAsyncThunk<Array<PizzaItemType>, ThunkArgumentsType, ThunkApiConfig>(
     'pizzas/fetchPizzasStatus',
     async ({currentPage, category, sort, order, search}) => {
-        const { data } = await axios({
+        const { data }: { data: Array<PizzaItemType> } = await axios({
             method: 'GET',
             url: `https://65d37906522627d50108f9e4.mockapi.io/pizzas`,
             params: {
                 p: currentPage + 1,
-                l: 4,
+                l: 8,
                 category: category ? category : null,
                 sortBy: sort,
                 order: order,
                 search: search ? search : null
             }
         })
+        console.log(data)
         return data
 
     }

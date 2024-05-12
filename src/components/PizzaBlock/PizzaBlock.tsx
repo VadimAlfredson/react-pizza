@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import '../../scss/_variables.scss'
 import '../../scss/app.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {addItem, PayloadPizzaType, PizzaItemType} from "../../Redux/Slices/cartSlice";
+import {addItem, PizzaType, PizzaItemType} from "../../Redux/Slices/cartSlice";
 import {useAppDispatch, useAppSelector} from "../../types/types";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 const typesName = ['тонкое', 'традиционное']
 const PizzaBlock: React.FC<PizzaItemType> = ({id, imageUrl, name, types, sizes, price, category, rating}) => {
@@ -33,7 +33,7 @@ const PizzaBlock: React.FC<PizzaItemType> = ({id, imageUrl, name, types, sizes, 
     return (
         <div className='pizza-block-wrapper'>
         <div className="pizza-block">
-            <Link to={`pizza/${id}`}>{imageUrl ? <img
+            <NavLink to={`pizza/${id}`}>{imageUrl ? <img
                 className="pizza-block__image"
                 src={imageUrl}
                 alt="Pizza"
@@ -42,7 +42,7 @@ const PizzaBlock: React.FC<PizzaItemType> = ({id, imageUrl, name, types, sizes, 
                     currentTarget.src='https://kuponoed.ru/wp-content/uploads/2020/05/3sv9dsvsd.png';
                 }}
             /> : <div style={{width: 260, height: 260, borderRadius: 130, backgroundColor: "grey"}}>Изображение отсутствет</div>}
-                <h4 className="pizza-block__title">{name}</h4></Link>
+                <h4 className="pizza-block__title">{name}</h4></NavLink>
             <div className="pizza-block__selector">
                 <ul>{types.map((type, index) => <li className={activeType === index ? 'active' : ''} key={index} onClick={() => setActiveType(index)}>{typesName[index]}</li>)}</ul>
                 <ul>{sizes.map((size, index) => <li className={activeSize === index ? 'active' : ''} key={index} onClick={() => setActiveSize(index)}>{size} см.</li>)}</ul>

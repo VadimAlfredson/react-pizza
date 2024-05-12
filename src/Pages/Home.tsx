@@ -50,8 +50,8 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1))
-            console.log(params)
+            //разберись после
+            const params: any = qs.parse(window.location.search.substring(1))
             dispatch(setParams(params))
             isSearch.current = true
         }

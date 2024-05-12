@@ -48,7 +48,7 @@
       464,
       512
     ],
-    "category": 56,
+    "category": 1,
     "rating": 1,
     "ingredients": [
       "Пикантная пепперони",
@@ -300,7 +300,7 @@
   {
     "id": "11",
     "imageUrl": "https://media.dodostatic.net/image/r:233x233/11EE7D611ADF5AAD898B8B651186E023.avif",
-    "name": "name 11",
+    "name": "Четыре сезона",
     "types": [
       0,
       1
@@ -511,41 +511,58 @@
   },
   {
     "id": "18",
-    "imageUrl": "imageUrl 18",
-    "name": "name 18",
-    "types": [],
-    "sizes": [],
-    "price": 18,
-    "category": 17,
-    "rating": 7,
-    "ingredients": [],
+    "imageUrl": "https://tashirpizza.ru/images/products/566-0.png",
+    "name": "Стафф-пицца Цыпленок",
+    "types": [
+      1
+    ],
+    "sizes": [
+      30,
+      40
+    ],
+    "price": [
+      430,
+      475
+    ],
+    "category": 5,
+    "rating": 5,
+    "ingredients": [
+      "Цыпленок",
+      "брокколи",
+      "моцарелла",
+      "красный лук",
+      "горчичный соус",
+      "майонез",
+      "сыр филадельфия"
+    ],
     "specialStatus": [],
     "info": "info 18"
   },
   {
     "id": "19",
-    "imageUrl": "imageUrl 19",
-    "name": "name 19",
-    "types": [],
-    "sizes": [],
-    "price": 60,
-    "category": 44,
-    "rating": 97,
-    "ingredients": [],
+    "imageUrl": "https://tashirpizza.ru/images/products/565-0.png",
+    "name": "Стафф-пицца Мясная",
+    "types": [
+      1
+    ],
+    "sizes": [
+      30,
+      40
+    ],
+    "price": [
+      455,
+      510
+    ],
+    "category": 5,
+    "rating": 5,
+    "ingredients": [
+      "Пеппирони",
+      "мясной фарш",
+      "томатный соус",
+      "моцарелла",
+      "халапеньо"
+    ],
     "specialStatus": [],
     "info": "info 19"
-  },
-  {
-    "id": "20",
-    "imageUrl": "imageUrl 20",
-    "name": "name 20",
-    "types": [],
-    "sizes": [],
-    "price": 44,
-    "category": 38,
-    "rating": 13,
-    "ingredients": [],
-    "specialStatus": [],
-    "info": "info 20"
   }
 ]

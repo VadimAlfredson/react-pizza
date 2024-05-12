@@ -1,12 +1,12 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {decrement, increment, PayloadPizzaType, PizzaItemType, removeItem} from "../../Redux/Slices/cartSlice";
+import {decrement, increment, PizzaType, PizzaItemType, removeItem} from "../../Redux/Slices/cartSlice";
 import {useAppDispatch} from "../../types/types";
 
 const typesSize: Array<string> = ['26см', '30см', '40см']
 const typesName: Array<string> = ['тонкое', 'традиционное']
 
-const CartPizzaBlock: React.FC<{pizza: PayloadPizzaType}> = ({pizza}) => {
+const CartPizzaBlock: React.FC<{pizza: PizzaType}> = ({pizza}) => {
     const dispatch = useAppDispatch()
 
     const onIncrementClick = () => {

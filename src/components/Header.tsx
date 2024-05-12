@@ -25,9 +25,8 @@ const Header: React.FC = () => {
             </div>
             </Link>
             <Search />
-            <Link to={'/cart'}>
             <div className="header__cart">
-                {pathname !== '/cart' && <a href="/cart.html" className="button button--cart">
+                {pathname !== '/cart' && <Link to="/cart" className="button button--cart">
                     <span>{sumPrice} ₽</span>
                     <div className="button__delimiter"></div>
                     <svg
@@ -60,9 +59,8 @@ const Header: React.FC = () => {
                         />
                     </svg>
                     <span>{totalCountCart}</span>
-                </a>}
+                </Link>}
             </div>
-            </Link>
         </div>
     </div>
 };

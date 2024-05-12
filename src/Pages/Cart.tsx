@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import '../App.css';
 import '../scss/_variables.scss'
@@ -9,6 +9,7 @@ import {clearItem} from "../Redux/Slices/cartSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 
 const Cart: React.FC = () => {
+    const isMounting = useRef(false)
 
     const dispatch = useAppDispatch()
     const cart = useAppSelector(state => state.cart)
@@ -17,6 +18,14 @@ const Cart: React.FC = () => {
         dispatch(clearItem())
     }
 
+    useEffect(() => {
+        if (isMounting.current){
+            window.localStorage.setItem('cart', JSON.stringify(cart.items))
+            console.log(JSON.stringify(cart.items))
+        }
+        isMounting.current = true
+        console.log(window.localStorage.getItem('cart'))
+    }, [cart.items])
 
     return (
         <div className="container container--cart">
