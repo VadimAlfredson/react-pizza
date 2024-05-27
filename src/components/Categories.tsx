@@ -5,6 +5,8 @@ import {useDispatch} from "react-redux";
 import {setCategory} from "../Redux/Slices/filterSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 import {filtersSelector} from "../Redux/Selectors";
+
+const categories: Array<string> = ['Все', "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые" ]
 const Categories: React.FC = () => {
     const filters = useAppSelector(filtersSelector)
     const [activeCategory, setActiveCategory] = React.useState<number>(filters.category)
@@ -15,7 +17,7 @@ const Categories: React.FC = () => {
         dispatch(setCategory(index))
     }
 
-    const categories: Array<string> = ['Всё', "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые" ]
+
 
     return (
         <div className="categories">

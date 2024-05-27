@@ -3,21 +3,26 @@ import '../scss/_variables.scss'
 import '../scss/app.scss'
 import {Link, useLocation} from "react-router-dom";
 import Search from "./Search/Search";
-import {useAppSelector} from "../types/types";
+import {useAppDispatch, useAppSelector} from "../types/types";
 import {cartSelector} from "../Redux/Selectors";
+import {clearSearch} from "../Redux/Slices/filterSlice";
 const Header: React.FC = () => {
 
     //const sumPrice: number = useAppSelector(state => state.cart.price)
     //const totalCountCart: number = useAppSelector(state => state.cart.count)
     const cart = useAppSelector(cartSelector)
 
+    const dispatch = useAppDispatch()
+
     const { pathname } = useLocation()
 
-
+const onBackHomeClick = () => {
+        dispatch(clearSearch())
+}
 
     return <div className="header">
         <div className="container">
-            <Link to={'/'} >
+            <Link to={'/'} onClick={onBackHomeClick}>
             <div className="header__logo">
                 <img width="38" src="https://react-pizza-v2.vercel.app/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg" alt="Pizza logo"/>
                 <div>

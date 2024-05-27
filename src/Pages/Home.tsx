@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import qs from 'qs'
 
 import Categories from "../components/Categories";
@@ -14,6 +14,8 @@ import {useNavigate} from "react-router-dom";
 import {fetchPizzas} from "../Redux/Slices/pizzasSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 import {filtersSelector, pizzasSelector} from "../Redux/Selectors";
+
+const categories: Array<string> = ['Все', "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые" ]
 
 
 const Home: React.FC = () => {
@@ -41,8 +43,8 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (window.location.search) {
-            //разберись после
             const params: any = qs.parse(window.location.search.substring(1))
+            console.log(params)
             dispatch(setParams(params))
             isSearch.current = true
         }
@@ -68,10 +70,10 @@ const Home: React.FC = () => {
                 <Categories/>
                 <Sort Order={handelOrderClick}/>
             </div>
-            <h2 className="content__title">Все пиццы</h2>
+            <h2 className="content__title">{categories[filters.category]} пиццы</h2>
             <div className="content__items">
                 {pizzas.status === 'pending' ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
-                    : pizzas.status === 'error' ? <b>Поиск не дал результатов :(</b>
+                    : pizzas.status === 'error' ? <b style={{width: '100%', textAlign: 'center', margin: 30}}>Поиск не дал результатов :(</b>
                         : pizzas.pizzasToCurrentPage.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
             </div>
             <Paginator/>

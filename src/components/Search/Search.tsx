@@ -31,6 +31,12 @@ const Search: React.FC = () => {
         }
     }, [debounceSearch])
 
+    useEffect(() => {
+        if (filters.search === '' && value){
+            setValue('')
+        }
+    }, [filters.search])
+
     return (
         <div className={styles.search}>
             <input
