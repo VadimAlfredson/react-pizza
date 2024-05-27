@@ -1,7 +1,7 @@
 import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from "axios";
-import {PizzaItemType, PizzaType} from "./cartSlice";
 import {AppDispatch, RootState} from "../Store";
+import {PizzaItemType} from "../../types/types";
 
 
 type InfoPizzaStateType = {
@@ -45,8 +45,8 @@ const initialState: InfoPizzaStateType = {
     status: 'pending'
 }
 
-const pizzasSlice = createSlice({
-    name: 'pizzaInfo',
+const infoSlice = createSlice({
+    name: 'info',
     initialState,
     reducers: {
         clearInfoPizza: (state) => {
@@ -94,5 +94,5 @@ const pizzasSlice = createSlice({
     }
 })
 
-export const {clearInfoPizza} = pizzasSlice.actions
-export default pizzasSlice
+export const {clearInfoPizza} = infoSlice.actions
+export default infoSlice

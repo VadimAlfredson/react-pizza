@@ -3,9 +3,11 @@ import '../scss/_variables.scss'
 import '../scss/app.scss'
 import {useDispatch} from "react-redux";
 import {setCategory} from "../Redux/Slices/filterSlice";
-import {useAppDispatch} from "../types/types";
+import {useAppDispatch, useAppSelector} from "../types/types";
+import {filtersSelector} from "../Redux/Selectors";
 const Categories: React.FC = () => {
-    const [activeCategory, setActiveCategory] = React.useState<number>(0)
+    const filters = useAppSelector(filtersSelector)
+    const [activeCategory, setActiveCategory] = React.useState<number>(filters.category)
 
     const dispatch = useAppDispatch()
     const onClickCategory = (index: number) => {

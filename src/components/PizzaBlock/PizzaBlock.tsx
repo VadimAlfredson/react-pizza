@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import '../../scss/_variables.scss'
 import '../../scss/app.scss'
-import {useDispatch, useSelector} from "react-redux";
-import {addItem, PizzaType, PizzaItemType} from "../../Redux/Slices/cartSlice";
-import {useAppDispatch, useAppSelector} from "../../types/types";
-import {Link, NavLink} from "react-router-dom";
+import {addItem} from "../../Redux/Slices/cartSlice";
+import {PizzaItemType, useAppDispatch, useAppSelector} from "../../types/types";
+import {NavLink} from "react-router-dom";
 
 const typesName = ['тонкое', 'традиционное']
 const PizzaBlock: React.FC<PizzaItemType> = ({id, imageUrl, name, types, sizes, price, category, rating}) => {

@@ -4,13 +4,14 @@ import styles from './Search.module.scss'
 import {setSearch, clearSearch} from "../../Redux/Slices/filterSlice";
 import {useDebounce} from "../../CustomHooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../types/types";
+import {filtersSelector} from "../../Redux/Selectors";
 
 const Search: React.FC = () => {
     const dispatch = useAppDispatch()
 
-    const search: string = useAppSelector(state => state.filters.search)
+    const filters = useAppSelector(filtersSelector)
 
-    const [value, setValue] = useState<string>(search)
+    const [value, setValue] = useState<string>(filters.search)
 
     const debounceSearch = useDebounce(value, 250)
 
@@ -25,7 +26,7 @@ const Search: React.FC = () => {
     }
 
     useEffect(() => {
-        if (debounceSearch !== search) {
+        if (debounceSearch !== filters.search) {
             dispatch(setSearch(debounceSearch))
         }
     }, [debounceSearch])
@@ -38,7 +39,7 @@ const Search: React.FC = () => {
                 placeholder={'Найти пиццу...'}
             />
             <img className={styles.searchIcon} src={`${process.env.PUBLIC_URL}/search.png`}/>
-            {search && <img onClick={() => onClearClick()} className={styles.closeIcon}
+            {filters.search && <img onClick={() => onClearClick()} className={styles.closeIcon}
                             src={`${process.env.PUBLIC_URL}/close.svg`}/>}
         </div>
     );

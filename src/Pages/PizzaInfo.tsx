@@ -3,55 +3,70 @@ import {Link, useParams} from 'react-router-dom';
 import '../App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
-import CartPizzaBlock from "../components/PizzaBlock/CartPizzaBlock";
-import {useDispatch, useSelector} from "react-redux";
-import {clearItem, PizzaItemType} from "../Redux/Slices/cartSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 import {clearInfoPizza, fetchInfoPizza} from "../Redux/Slices/infoPizzaSlice";
+import {infoSelector} from "../Redux/Selectors";
+import {addItem} from "../Redux/Slices/cartSlice";
 
 const typesName = ['тонкое', 'традиционное']
 const PizzaInfo: React.FC = () => {
     const {id} = useParams()
 
     const dispatch = useAppDispatch()
-    const info: PizzaItemType = useAppSelector(state => state.infoPizza.infoPizza)
+    const info = useAppSelector(infoSelector)
+    const pizzaCount: number = useAppSelector(state => state.cart.items.filter(obj => Number(obj.id) === Number(id)).reduce((acc: number, pizza) => pizza.count + acc, 0))
 
     const [activeType, setActiveType] = useState<number>(0)
     const [activeSize, setActiveSize] = useState<number>(0)
 
+    const addPizzaClick = () => {
+        dispatch(addItem({
+            id: info.infoPizza.id,
+            imageUrl: info.infoPizza.imageUrl,
+            name: info.infoPizza.name,
+            type: activeType,
+            size: activeSize,
+            price: info.infoPizza.price[activeSize],
+            category: info.infoPizza.category,
+            rating: info.infoPizza.rating,
+            count: 1
+        }))}
+
     useEffect(() => {
-        if (id !== String(info.id)){
+        if (id !== String(info.infoPizza.id)){
         dispatch(fetchInfoPizza(id))
             }
-        console.log(info)
-        return () => {
+        /*return () => {
             dispatch(clearInfoPizza())
-        }
+        }*/
     }, [id])
 
     return (
-        <div className="container container--cart">
-           {info.name ? <div className="pizza-block">
-                <Link to={`pizza/${id}`}>{info.imageUrl ? <img
-                    className="pizza-block__image"
-                    src={info.imageUrl}
+        <div className="container container--info">
+           <div className="info-pizza-block">
+               <div className="img-block">
+                   <img
+                    className={'img'}
+                    src={info.infoPizza.imageUrl}
                     alt="Pizza"
                     onError={({currentTarget}) => {
                         currentTarget.onerror = null; // prevents looping
                         currentTarget.src = 'https://kuponoed.ru/wp-content/uploads/2020/05/3sv9dsvsd.png';
                     }}
-                /> : <div style={{width: 260, height: 260, borderRadius: 130, backgroundColor: "grey"}}>Изображение
-                    отсутствет</div>}
-                    <h4 className="pizza-block__title">{info.name}</h4></Link>
+                />
+               </div>
+
+               <div className='info-side'><h2 className="title">{info.infoPizza.name}</h2>
+                   <div><h4>Ингридиенты: </h4>  {info.infoPizza.ingredients.join(", ")}</div>
                 <div className="pizza-block__selector">
-                    <ul>{info.types.map((type, index) => <li className={activeType === index ? 'active' : ''} key={index}
+                    <ul>{info.infoPizza.types.map((type, index) => <li className={activeType === index ? 'active' : ''} key={index}
                                                         onClick={() => setActiveType(index)}>{typesName[index]}</li>)}</ul>
-                    <ul>{info.sizes.map((size, index) => <li className={activeSize === index ? 'active' : ''} key={index}
+                    <ul>{info.infoPizza.sizes.map((size, index) => <li className={activeSize === index ? 'active' : ''} key={index}
                                                         onClick={() => setActiveSize(index)}>{size} см.</li>)}</ul>
                 </div>
                 <div className="pizza-block__bottom">
-                    <div className="pizza-block__price">от {info.price[activeSize]} ₽</div>
-                    <button onClick={() => {}} className="button button--outline button--add">
+                    <div className="pizza-block__price">от {info.infoPizza.price[activeSize]} ₽</div>
+                    <button onClick={addPizzaClick} className="button button--outline button--add">
                         <svg
                             width="12"
                             height="12"
@@ -65,10 +80,10 @@ const PizzaInfo: React.FC = () => {
                             />
                         </svg>
                         <span>Добавить</span>
-                        {/*{pizzaCount > 0 && <i>{pizzaCount}</i>}*/}
+                        {pizzaCount > 0 && <i>{pizzaCount}</i>}
                     </button>
-                </div>
-            </div> : "sda"}
+                </div></div>
+            </div>
         </div>
     );
 };

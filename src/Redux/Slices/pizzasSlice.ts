@@ -1,8 +1,8 @@
 import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from "axios";
-import {PizzaItemType} from "./cartSlice";
 import {AppDispatch, RootState} from "../Store";
 import {Pagination} from "../../utils/Pagination";
+import {PizzaItemType} from "../../types/types";
 
 
 type PizzasStateType = {
@@ -17,7 +17,7 @@ export type ThunkArgumentsType = {
     category?: number | null,
     sort: 'rating' | 'price' | 'name',
     order: 'asc' | 'desc',
-    search?: string,
+    search: string
 }
 
 
@@ -62,6 +62,13 @@ const pizzasSlice = createSlice({
         getPizzasToPage: (state, action: PayloadAction<number>) => {
             state.pizzasToCurrentPage = Pagination(state.pizzas, action.payload)
             state.currentPage = action.payload
+        },
+        getSearchPizza: (state, action: PayloadAction<string>) => {
+            const searchResult = state.pizzas.filter((pizza, index) => pizza.name.includes(action.payload))
+            state.pizzas = searchResult
+            state.pizzasToCurrentPage = Pagination(searchResult, 1)
+            state.currentPage = 1
+            state.totalCount = Math.ceil(searchResult.length / 8)
         }
     },
     extraReducers: (builder: ActionReducerMapBuilder<PizzasStateType>) => {
@@ -91,5 +98,5 @@ const pizzasSlice = createSlice({
     }
 })
 
-export const {getPizzasToPage} = pizzasSlice.actions
+export const {getPizzasToPage, getSearchPizza} = pizzasSlice.actions
 export default pizzasSlice

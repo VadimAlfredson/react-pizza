@@ -4,18 +4,20 @@ import '../scss/app.scss'
 import {Link, useLocation} from "react-router-dom";
 import Search from "./Search/Search";
 import {useAppSelector} from "../types/types";
+import {cartSelector} from "../Redux/Selectors";
 const Header: React.FC = () => {
 
-    const sumPrice: number = useAppSelector(state => state.cart.price)
-    const totalCountCart: number = useAppSelector(state => state.cart.count)
+    //const sumPrice: number = useAppSelector(state => state.cart.price)
+    //const totalCountCart: number = useAppSelector(state => state.cart.count)
+    const cart = useAppSelector(cartSelector)
 
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
 
 
 
     return <div className="header">
         <div className="container">
-            <Link to={'/'}>
+            <Link to={'/'} >
             <div className="header__logo">
                 <img width="38" src="https://react-pizza-v2.vercel.app/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg" alt="Pizza logo"/>
                 <div>
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
             <Search />
             <div className="header__cart">
                 {pathname !== '/cart' && <Link to="/cart" className="button button--cart">
-                    <span>{sumPrice} ₽</span>
+                    <span>{cart.price} ₽</span>
                     <div className="button__delimiter"></div>
                     <svg
                         width="18"
@@ -58,7 +60,7 @@ const Header: React.FC = () => {
                             strokeLinejoin="round"
                         />
                     </svg>
-                    <span>{totalCountCart}</span>
+                    <span>{cart.count}</span>
                 </Link>}
             </div>
         </div>

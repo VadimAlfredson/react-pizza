@@ -5,17 +5,15 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaBlock/Skeleton";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
-
 import '../App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import Paginator from "../components/Paginator/Paginator";
-import {useDispatch, useSelector} from "react-redux";
 import {setOrder, setParams} from "../Redux/Slices/filterSlice";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
-import {fetchPizzas, ThunkArgumentsType} from "../Redux/Slices/pizzasSlice";
+import {fetchPizzas} from "../Redux/Slices/pizzasSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
+import {filtersSelector, pizzasSelector} from "../Redux/Selectors";
 
 
 const Home: React.FC = () => {
@@ -26,13 +24,8 @@ const Home: React.FC = () => {
 
     const dispatch = useAppDispatch()
 
-    const category = useAppSelector((state) => state.filters.category)
-    const sort = useAppSelector((state) => state.filters.sort)
-    const order = useAppSelector((state) => state.filters.order)
-    const search = useAppSelector(state => state.filters.search)
-    const pizzas = useAppSelector(state => state.pizzas.pizzasToCurrentPage)
-    const fetchStatus = useAppSelector(state => state.pizzas.status)
-    const currentPage = useAppSelector(state => state.pizzas.currentPage)
+    const filters = useAppSelector(filtersSelector)
+    const pizzas = useAppSelector(pizzasSelector)
     const handelOrderClick: () => void = () => {
         dispatch(setOrder())
     }
@@ -41,10 +34,10 @@ const Home: React.FC = () => {
     useEffect(() => {
         if (!isSearch.current) {
             /*fetchPizza()*/
-            dispatch(fetchPizzas({category, sort, order, search}))
+            dispatch(fetchPizzas({category: filters.category, sort: filters.sort, order: filters.order, search: filters.search}))
         }
         isSearch.current = false
-    }, [category, sort, order, search])
+    }, [filters.category, filters.sort, filters.order, filters.search])
 
     useEffect(() => {
         if (window.location.search) {
@@ -59,14 +52,14 @@ const Home: React.FC = () => {
     useEffect(() => {
         if (isMounting.current) {
             const queryString = qs.stringify({
-                category,
-                currentPage,
-                sort,
+                category: filters.category,
+                currentPage: pizzas.currentPage,
+                sort: filters.sort
             })
-            navigate(`?${queryString}`)
+            navigate(`?${queryString}` +(filters.search ? `search=${filters.search}` : ''))
         }
         isMounting.current = true
-    }, [category, sort, order, search, currentPage])
+    }, [filters.category, filters.sort, filters.order, filters.search, pizzas.currentPage])
 
 
     return <>
@@ -77,9 +70,9 @@ const Home: React.FC = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {fetchStatus === 'pending' ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
-                    : fetchStatus === 'error' ? <b>Поиск не дал результатов :(</b>
-                        : pizzas.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
+                {pizzas.status === 'pending' ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
+                    : pizzas.status === 'error' ? <b>Поиск не дал результатов :(</b>
+                        : pizzas.pizzasToCurrentPage.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
             </div>
             <Paginator/>
         </div>

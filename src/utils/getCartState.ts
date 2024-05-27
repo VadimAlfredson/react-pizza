@@ -1,8 +1,9 @@
-import {PizzaType} from "../Redux/Slices/cartSlice";
+import {PizzaCartType} from "../types/types";
+
 
 export const getCartInitialState = () => {
     const itemsJS = window.localStorage.getItem('cart')
-    const items: Array<PizzaType> = itemsJS ? JSON.parse(itemsJS) : []
+    const items: Array<PizzaCartType> = itemsJS ? JSON.parse(itemsJS) : []
     let price: number = 0
     let count: number = 0
     if (items.length){

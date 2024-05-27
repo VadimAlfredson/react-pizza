@@ -7,12 +7,13 @@ import CartPizzaBlock from "../components/PizzaBlock/CartPizzaBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {clearItem} from "../Redux/Slices/cartSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
+import {cartSelector} from "../Redux/Selectors";
 
 const Cart: React.FC = () => {
     const isMounting = useRef(false)
 
     const dispatch = useAppDispatch()
-    const cart = useAppSelector(state => state.cart)
+    const cart = useAppSelector(cartSelector)
 
     const onClearCard = () => {
         dispatch(clearItem())
