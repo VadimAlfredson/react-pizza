@@ -6,23 +6,24 @@ import Header from "./components/Header";
 import {Route, Routes} from "react-router-dom";
 import Home from "./Pages/Home";
 import NotFount from "./Pages/NotFount";
-import Cart from "./Pages/Cart";
 import PizzaInfo from "./Pages/PizzaInfo";
+import {lazy, Suspense} from "react";
 
-
+const CartLazy = lazy(() => import("./Pages/Cart"))
 
 function App() {
-
     return (
         <div className="wrapper">
             <Header />
             <div className="content">
+                <Suspense fallback={'Загрузка...'}>
                 <Routes>
                     <Route path='/' element={<Home />}/>
-                    <Route path='/cart' element={<Cart />}/>
+                    <Route path='/cart' element={<CartLazy />}/>
                     <Route path='/*' element={<NotFount />}/>
                     <Route path='/pizza/:id' element={<PizzaInfo />}/>
                 </Routes>
+                </Suspense>
             </div>
         </div>
     );

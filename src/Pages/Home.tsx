@@ -43,6 +43,7 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (window.location.search) {
+            //Вот тут хз с TS как
             const params: any = qs.parse(window.location.search.substring(1))
             console.log(params)
             dispatch(setParams(params))
