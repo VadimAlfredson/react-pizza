@@ -35,7 +35,6 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (!isSearch.current) {
-            /*fetchPizza()*/
             dispatch(fetchPizzas({category: filters.category, sort: filters.sort, order: filters.order, search: filters.search}))
         }
         isSearch.current = false
