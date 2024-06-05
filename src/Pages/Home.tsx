@@ -15,7 +15,7 @@ import {fetchPizzas} from "../Redux/Slices/pizzasSlice";
 import {useAppDispatch, useAppSelector} from "../types/types";
 import {filtersSelector, pizzasSelector} from "../Redux/Selectors";
 
-const categories: Array<string> = ['Все', "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые" ]
+const categories: Array<string> = ['Все', "Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые" ]
 
 
 const Home: React.FC = () => {
@@ -48,8 +48,9 @@ const Home: React.FC = () => {
             dispatch(setParams(params))
             isSearch.current = true
         }
-
     }, [])
+
+
 
     useEffect(() => {
         if (isMounting.current) {
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
                 currentPage: pizzas.currentPage,
                 sort: filters.sort
             })
-            navigate(`?${queryString}` +(filters.search ? `search=${filters.search}` : ''))
+            navigate(`?${queryString}` +(filters.search ? `&search=${filters.search}` : ''))
         }
         isMounting.current = true
     }, [filters.category, filters.sort, filters.order, filters.search, pizzas.currentPage])
@@ -76,7 +77,7 @@ const Home: React.FC = () => {
                     : pizzas.status === 'error' ? <b style={{width: '100%', textAlign: 'center', margin: 30}}>Поиск не дал результатов :(</b>
                         : pizzas.pizzasToCurrentPage.map(pizza => <PizzaBlock {...pizza} key={pizza.id}/>)}
             </div>
-            <Paginator/>
+            {pizzas.status === 'success' && <Paginator/> }
         </div>
     </>
 };

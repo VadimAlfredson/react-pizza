@@ -4,12 +4,14 @@ import styles from './Search.module.scss'
 import {setSearch, clearSearch} from "../../Redux/Slices/filterSlice";
 import {useDebounce} from "../../CustomHooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../types/types";
-import {filtersSelector} from "../../Redux/Selectors";
+import {filtersSelector, pizzasSelector} from "../../Redux/Selectors";
 
 const Search: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const filters = useAppSelector(filtersSelector)
+
+    const pizzas = useAppSelector(pizzasSelector)
 
     const [value, setValue] = useState<string>(filters.search)
 
@@ -36,6 +38,13 @@ const Search: React.FC = () => {
             setValue('')
         }
     }, [filters.search])
+
+    useEffect(() => {
+        if (pizzas.status === 'error') {
+            dispatch(clearSearch())
+            setValue('')
+        }
+    }, [filters.category])
 
     return (
         <div className={styles.search}>

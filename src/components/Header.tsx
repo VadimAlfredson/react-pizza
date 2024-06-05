@@ -8,8 +8,6 @@ import {cartSelector} from "../Redux/Selectors";
 import {clearSearch} from "../Redux/Slices/filterSlice";
 const Header: React.FC = () => {
 
-    //const sumPrice: number = useAppSelector(state => state.cart.price)
-    //const totalCountCart: number = useAppSelector(state => state.cart.count)
     const cart = useAppSelector(cartSelector)
 
     const dispatch = useAppDispatch()

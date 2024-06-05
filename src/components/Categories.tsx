@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import {useDispatch} from "react-redux";
@@ -16,6 +16,13 @@ const Categories: React.FC = () => {
         setActiveCategory(index)
         dispatch(setCategory(index))
     }
+
+    useEffect(() => {
+        if (filters.search != ''){
+            setActiveCategory(0)
+            dispatch(setCategory(0))
+        }
+    }, [filters.search])
 
 
 

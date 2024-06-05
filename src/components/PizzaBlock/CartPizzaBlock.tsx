@@ -1,5 +1,4 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
 import {decrement, increment, removeItem} from "../../Redux/Slices/cartSlice";
 import {PizzaCartType, useAppDispatch} from "../../types/types";
 
@@ -29,7 +28,7 @@ const CartPizzaBlock: React.FC<{pizza: PizzaCartType}> = ({pizza}) => {
             </div>
             <div className="cart__item-info">
                 <h3>{pizza.name}</h3>
-                <p>{typesName[pizza.type]}{typesSize[pizza.size]}</p>
+                <p>Тесто {typesName[pizza.type]}, {typesSize[pizza.size]}</p>
             </div>
             <div className="cart__item-count">
                 <button onClick={() => onDecrementClick()}
