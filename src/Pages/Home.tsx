@@ -5,7 +5,7 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaSkeleton from "../components/PizzaBlock/Skeleton";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
-import '../App.css';
+import '../app/App/App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import Paginator from "../components/Paginator/Paginator";

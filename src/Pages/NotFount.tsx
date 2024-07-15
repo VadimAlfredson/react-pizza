@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../App.css';
+import '../app/App/App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import NotFountBlock from "../components/NotFountBlock/NotFountBlock";

@@ -1,6 +1,6 @@
 import React, {memo, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
-import '../App.css';
+import '../app/App/App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import CartPizzaBlock from "../components/PizzaBlock/CartPizzaBlock";

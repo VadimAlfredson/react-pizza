@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import '../App.css';
+import '../app/App/App.css';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
 import {useAppDispatch, useAppSelector} from "../types/types";
