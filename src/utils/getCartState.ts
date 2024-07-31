@@ -1,4 +1,4 @@
-import {PizzaCartType} from "../types/types";
+import {PizzaCartType} from "../entities/Pizza/model/types";
 
 
 export const getCartInitialState = () => {

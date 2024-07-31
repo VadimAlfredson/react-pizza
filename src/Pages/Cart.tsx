@@ -97,7 +97,7 @@ const Cart: React.FC = () => {
                     </div>
                 </div>
                 <div className="cart__items">
-                    {cart.items.length ? cart.items.map(pizza => <CartPizzaBlock pizza={pizza} key={`${pizza.id}size${pizza.size}`}/>) : <h1>Карзина пуста</h1>}
+                    {cart.items.length ? cart.items.map(pizza => <CartPizzaBlock pizza={pizza} key={`${pizza.id}size${pizza.size}`}/>) : <h1>Корзина пуста</h1>}
                 </div>
                 <div className="cart__bottom">
                     <div className="cart__bottom-details">

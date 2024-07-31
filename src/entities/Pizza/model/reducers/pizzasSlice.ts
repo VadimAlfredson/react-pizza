@@ -1,8 +1,9 @@
 import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from "axios";
-import {AppDispatch, RootState} from "../Store";
-import {Pagination} from "../../utils/Pagination";
-import {PizzaItemType} from "../../types/types";
+import {AppDispatch, RootState} from "../../../../Redux/Store";
+import {Pagination} from "../../../../utils/Pagination";
+import {fetchPizzas} from "../../../../Pages/main/api/getPizzas";
+import {PizzaItemType} from "../types";
 
 
 type PizzasStateType = {
@@ -20,32 +21,6 @@ export type ThunkArgumentsType = {
     search: string
 }
 
-
-type ThunkApiConfig = {
-    state: RootState
-    dispatch: AppDispatch
-    rejectValue: string
-    extra: any
-}
-
-export const fetchPizzas = createAsyncThunk<Array<PizzaItemType>, ThunkArgumentsType, ThunkApiConfig>(
-    'pizzas/fetchPizzasStatus',
-    async ({category, sort, order, search}) => {
-        const {data}: { data: Array<PizzaItemType> } = await axios({
-            method: 'GET',
-            url: `https://65d37906522627d50108f9e4.mockapi.io/pizzas`,
-            params: {
-                category: category ? category : null,
-                sortBy: sort,
-                order: order,
-                search: search ? search : null
-            }
-        })
-        console.log(data)
-        return data
-
-    }
-)
 
 const initialState: PizzasStateType = {
     pizzas: [],
@@ -81,20 +56,22 @@ const pizzasSlice = createSlice({
                     state.currentPage = 1
                     state.totalCount = Math.ceil(action.payload.length / 8)
                 })
-            .addCase(fetchPizzas.pending, (state) => {
-                state.status = 'pending'
-                state.pizzas = []
-                state.pizzasToCurrentPage = []
-                state.currentPage = 1
-                state.totalCount = 1
-            })
-            .addCase(fetchPizzas.rejected, (state) => {
-                state.status = 'error'
-                state.pizzas = []
-                state.pizzasToCurrentPage = []
-                state.currentPage = 1
-                state.totalCount = 1
-            })
+            .addCase(
+                fetchPizzas.pending, (state) => {
+                    state.status = 'pending'
+                    state.pizzas = []
+                    state.pizzasToCurrentPage = []
+                    state.currentPage = 1
+                    state.totalCount = 1
+                })
+            .addCase(
+                fetchPizzas.rejected, (state) => {
+                    state.status = 'error'
+                    state.pizzas = []
+                    state.pizzasToCurrentPage = []
+                    state.currentPage = 1
+                    state.totalCount = 1
+                })
     }
 })
 

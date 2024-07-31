@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {getCartInitialState} from "../../utils/getCartState";
-import {PizzaCartType} from "../../types/types";
+import {PizzaCartType} from "../../entities/Pizza/model/types";
 
 
 

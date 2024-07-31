@@ -1,6 +1,7 @@
 import React from 'react';
 import {decrement, increment, removeItem} from "../../Redux/Slices/cartSlice";
-import {PizzaCartType, useAppDispatch} from "../../types/types";
+import {useAppDispatch} from "../../types/types";
+import {PizzaCartType} from "../../entities/Pizza/model/types";
 
 const typesSize: Array<string> = ['26см', '30см', '40см']
 const typesName: Array<string> = ['тонкое', 'традиционное']

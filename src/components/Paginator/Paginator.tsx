@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import style from './Paginator.module.scss'
 import {useAppDispatch, useAppSelector} from "../../types/types";
-import {getPizzasToPage} from "../../Redux/Slices/pizzasSlice";
+import {getPizzasToPage} from "../../entities/Pizza/model/reducers/pizzasSlice";
 import {pizzasSelector} from "../../Redux/Selectors";
 
 const Paginator: React.FC = memo(function Paginator() {
