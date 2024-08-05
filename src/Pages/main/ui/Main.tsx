@@ -3,8 +3,8 @@ import qs from 'qs'
 
 import Categories from "../../../components/Categories";
 import Sort from "../../../components/Sort";
-import PizzaSkeleton from "../../../components/PizzaBlock/Skeleton";
-import PizzaBlock from "../../../entities/Pizza/ui/Pizzas/PizzaBlock";
+import PizzaSkeleton from "../../../shared/Skeleton/SkeletonPizzaItem";
+import PizzaItem from "../../../entities/Pizza/ui/Pizzas/PizzaItem";
 import '../../../app/App/App.css';
 import '../../../scss/_variables.scss'
 import '../../../scss/app.scss'
@@ -38,12 +38,7 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         if (!isSearch.current) {
-            dispatch(fetchPizzas({
-                category: filters.category,
-                sort: filters.sort,
-                order: filters.order,
-                search: filters.search
-            }))
+            dispatch(fetchPizzas(filters))
         }
         isSearch.current = false
     }, [filters.category, filters.sort, filters.order, filters.search])
@@ -81,10 +76,10 @@ const Main: React.FC = () => {
                 {pizzas.status === 'pending' ? [...new Array(8)].map((_, index) => <PizzaSkeleton key={index}/>)
                     : pizzas.status === 'error' ?
                         <b style={{width: '100%', textAlign: 'center', margin: 30}}>Поиск не дал результатов :(</b>
-                        : pizzas.pizzasToCurrentPage.map(pizza => <PizzaBlock pizza={pizza}
-                                                                              ButtonAddItem={ButtonAddItem}
-                                                                              ParametersSelectionBlock={ParametersSelectionBlock}
-                                                                              key={pizza.id}/>)}
+                        : pizzas.pizzasToCurrentPage.map(pizza => <PizzaItem pizza={pizza}
+                                                                             ButtonAddItem={ButtonAddItem}
+                                                                             ParametersSelectionBlock={ParametersSelectionBlock}
+                                                                             key={pizza.id}/>)}
             </div>
             {pizzas.status === 'success' && <Paginator/>}
         </div>

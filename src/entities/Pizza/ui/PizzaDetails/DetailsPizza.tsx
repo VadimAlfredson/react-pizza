@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import {pizzaCount} from "../../model/pizzaCount";
 import {useAppDispatch, useAppSelector} from "../../../../types/types";
 import {detailsPizzaSelector, pizzasInCartSelector, statusDetailsSelector} from "../../model/Selectors";
 import {fetchPizzaDetails} from "../../api/getPizza";
 import {clearInfoPizza} from "../../model/reducers/detailsPizzaReducer";
-import Skeleton from "../../../../components/PizzaBlock/Skeleton";
+import Skeleton from "../../../../shared/Skeleton/SkeletonPizzaItem";
 import ButtonAddItem from "../../../../features/ButtonAddItem/ui/buttonAddItem";
 
-const DetailsPizza: React.FC<{ButtonAddItem: any, ParametersSelectionBlock: any}> = ({ParametersSelectionBlock, ButtonAddItem}) => {
+const DetailsPizza: React.FC<{ButtonAddItem: any, ParametersSelectionBlock: any, id: string | undefined}> = ({ParametersSelectionBlock, ButtonAddItem, id}) => {
 
 
     const dispatch = useAppDispatch()
-
-    const {id} = useParams()
 
     const detailsPizza = useAppSelector(detailsPizzaSelector)
 

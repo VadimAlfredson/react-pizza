@@ -1,4 +1,4 @@
-import React, {JSX, JSXElementConstructor, useState} from 'react';
+import React, {useState} from 'react';
 import '../../../../scss/_variables.scss'
 import '../../../../scss/app.scss'
 import {useAppSelector} from "../../../../types/types";
@@ -8,7 +8,7 @@ import {pizzasInCartSelector} from "../../model/Selectors";
 import ButtonAddItem from "../../../../features/ButtonAddItem/ui/buttonAddItem";
 import {PizzaCartType, PizzaItemType} from "../../model/types";
 
-const PizzaBlock: React.FC<{pizza: PizzaItemType, ButtonAddItem: any, ParametersSelectionBlock: any}> = ({pizza, ButtonAddItem, ParametersSelectionBlock}) => {
+const PizzaItem: React.FC<{pizza: PizzaItemType, ButtonAddItem: any, ParametersSelectionBlock: any}> = ({pizza, ButtonAddItem, ParametersSelectionBlock}) => {
 
     const [[activeType, activeSize], setActiveParameters] = useState<[number, number]>([0, 0])
 
@@ -27,8 +27,7 @@ const PizzaBlock: React.FC<{pizza: PizzaItemType, ButtonAddItem: any, Parameters
                         currentTarget.onerror = null; // prevents looping
                         currentTarget.src = 'https://kuponoed.ru/wp-content/uploads/2020/05/3sv9dsvsd.png';
                     }}
-                /> : <div style={{width: 260, height: 260, borderRadius: 130, backgroundColor: "grey"}}>Изображение
-                    отсутствет</div>}
+                /> : <div style={{width: 260, height: 260, borderRadius: 130, backgroundColor: "grey"}}/>}
                     <h4 className="pizza-block__title">{pizza.name}</h4></NavLink>
                 <ParametersSelectionBlock pizza={pizza} setActiveParameters={setActiveParameters}/>
                 <div className="pizza-block__bottom">
@@ -40,4 +39,4 @@ const PizzaBlock: React.FC<{pizza: PizzaItemType, ButtonAddItem: any, Parameters
     )
 };
 
-export default PizzaBlock;
+export default PizzaItem;
