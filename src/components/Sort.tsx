@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import '../scss/_variables.scss'
 import '../scss/app.scss'
-import {setSort} from "../Redux/Slices/filterSlice";
+import {setSort} from "../app/Redux/Slices/filterSlice";
 import {useAppDispatch} from "../types/types";
 
 const Sort: React.FC<{Order: () => void}> = (props) => {

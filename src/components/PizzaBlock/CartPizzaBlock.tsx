@@ -1,5 +1,5 @@
 import React from 'react';
-import {decrement, increment, removeItem} from "../../Redux/Slices/cartSlice";
+import {decrement, increment, removeItem} from "../../app/Redux/Slices/cartSlice";
 import {useAppDispatch} from "../../types/types";
 import {PizzaCartType} from "../../entities/Pizza/model/types";
 

@@ -1,4 +1,4 @@
-import {AppDispatch, RootState} from "../../../Redux/Store";
+import {AppDispatch, RootState} from "../../../app/Redux/Store";
 
 export type PizzaCartType = {
     id: number,

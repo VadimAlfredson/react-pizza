@@ -1,4 +1,4 @@
-import {addItem} from "../../../Redux/Slices/cartSlice";
+import {addItem} from "../../../app/Redux/Slices/cartSlice";
 import {PizzaItemType} from "./types";
 
 export const addPizza = (pizza: PizzaItemType, activeType = 0, activeSize = 0) => addItem({

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {pizzaCount} from "../../model/pizzaCount";
 import {useAppDispatch, useAppSelector} from "../../../../types/types";
-import {detailsPizzaSelector, pizzasInCartSelector, statusDetailsSelector} from "../../model/Selectors";
+import {detailsPizzaSelector, pizzasInCartSelector, statusDetailsSelector} from "../../model/selectors";
 import {fetchPizzaDetails} from "../../api/getPizza";
 import {clearInfoPizza} from "../../model/reducers/detailsPizzaReducer";
 import Skeleton from "../../../../shared/Skeleton/SkeletonPizzaItem";

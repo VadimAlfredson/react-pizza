@@ -4,7 +4,7 @@ import '../../../../scss/app.scss'
 import {useAppSelector} from "../../../../types/types";
 import {NavLink} from "react-router-dom";
 import {pizzaCount} from "../../model/pizzaCount";
-import {pizzasInCartSelector} from "../../model/Selectors";
+import {pizzasInCartSelector} from "../../model/selectors";
 import ButtonAddItem from "../../../../features/ButtonAddItem/ui/buttonAddItem";
 import {PizzaCartType, PizzaItemType} from "../../model/types";
 
