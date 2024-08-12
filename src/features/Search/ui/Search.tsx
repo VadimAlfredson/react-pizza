@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './Search.module.scss'
 import {setSearch, clearSearch} from "../../../app/Redux/Slices/filterSlice";
 import {useDebounce} from "../../../shared/CustomHooks/useDebounce";
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {categorySelector, searchSelector, statusSelector} from "../model/selectors";
 
 const Search: React.FC = () => {

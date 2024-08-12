@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import '../../../scss/_variables.scss'
 import '../../../scss/app.scss'
 import {setCategory} from "../../../app/Redux/Slices/filterSlice";
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {categorySelector, searchSelector} from "../model/selectors";
 import {categories} from "../model/categories";
 

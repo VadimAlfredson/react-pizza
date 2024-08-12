@@ -1,6 +1,6 @@
 import React, {JSXElementConstructor} from 'react';
 import {addPizza} from "../../../entities/Pizza/model/addPizza";
-import {useAppDispatch} from "../../../types/types";
+import {useAppDispatch} from "../../../app/Redux/Types/types";
 import {PizzaItemType} from "../../../entities/Pizza/model/types";
 const ButtonAddItem: React.FC<{pizza: PizzaItemType, activeType: number, activeSize: number, count: number}> = ({pizza, activeType, activeSize, count}) => {
     const dispatch = useAppDispatch()

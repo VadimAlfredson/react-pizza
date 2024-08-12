@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 import '../../../app/App/App.css';
 import '../../../scss/_variables.scss'
 import '../../../scss/app.scss'
-import CartPizzaBlock from "../../../components/PizzaBlock/CartPizzaBlock";
-import {clearItem} from "../../../app/Redux/Slices/cartSlice";
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import PizzaCart from "../../../entities/Pizza/ui/PizzaCart/PizzaCart";
+import {clearItem} from "../../../entities/Pizza/model/reducers/cartSlice";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import UrnIcon from "../../../shared/icons/urnIcon";
 import CartIcon from "../../../shared/icons/cartIcon";
 import ArrowBackIcon from "../../../shared/icons/arrowBackIcon";
@@ -44,8 +44,8 @@ const Cart: React.FC = () => {
                     </div>
                 </div>
                 <div className="cart__items">
-                    {cart.items.length ? cart.items.map(pizza => <CartPizzaBlock pizza={pizza}
-                                                                                 key={`${pizza.id}size${pizza.size}`}/>) :
+                    {cart.items.length ? cart.items.map(pizza => <PizzaCart pizza={pizza}
+                                                                            key={`${pizza.id}size${pizza.size}`}/>) :
                         <h1>Корзина пуста</h1>}
                 </div>
                 <div className="cart__bottom">

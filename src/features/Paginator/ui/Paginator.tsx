@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import style from './Paginator.module.scss'
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {getPizzasToPage} from "../../../entities/Pizza/model/reducers/pizzasSlice";
 import {currentPageSelector, totalCountSelector} from "../model/selectors";
 

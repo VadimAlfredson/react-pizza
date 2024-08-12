@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../../../../scss/_variables.scss'
 import '../../../../scss/app.scss'
-import {useAppSelector} from "../../../../types/types";
+import {useAppSelector} from "../../../../app/Redux/Types/types";
 import {NavLink} from "react-router-dom";
 import {pizzaCount} from "../../model/pizzaCount";
 import {pizzasInCartSelector} from "../../model/selectors";

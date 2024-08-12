@@ -3,7 +3,7 @@ import '../../../scss/_variables.scss'
 import '../../../scss/app.scss'
 import {Link, useLocation} from "react-router-dom";
 import Search from "../../../features/Search/ui/Search";
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {clearSearch} from "../../../app/Redux/Slices/filterSlice";
 import CartIcon from "../../../shared/icons/cartIcon";
 import {countSelector, priceSelector} from "../model/selectors";

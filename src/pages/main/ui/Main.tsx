@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import qs from 'qs'
 
 import Categories from "../../../features/Categories/ui/Categories";
-import Sort from "../../../components/Sort";
+import Sort from "../../../features/Sort/ui/Sort";
 import PizzaSkeleton from "../../../shared/Skeleton/SkeletonPizzaItem";
 import PizzaItem from "../../../entities/Pizza/ui/Pizzas/PizzaItem";
 import '../../../app/App/App.css';
@@ -11,7 +11,7 @@ import '../../../scss/app.scss'
 import Paginator from "../../../features/Paginator/ui/Paginator";
 import {setOrder, setParams} from "../../../app/Redux/Slices/filterSlice";
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {filtersSelector, pizzasSelector} from "../model/Selectors";
 import {fetchPizzas} from "../api/getPizzas";
 import ButtonAddItem from "../../../features/ButtonAddItem/ui/buttonAddItem";

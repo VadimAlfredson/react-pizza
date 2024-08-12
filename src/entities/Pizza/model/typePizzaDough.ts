@@ -1,0 +1,1 @@
+export const typesDough: Array<string> = ['тонкое', 'традиционное']
