@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import '../../../app/App/App.css';
-import '../../../scss/_variables.scss'
-import '../../../scss/app.scss'
+import '../../../app/Styles/scss/_variables.scss'
+import '../../../app/Styles/scss/app.scss'
 import PizzaCart from "../../../entities/Pizza/ui/PizzaCart/PizzaCart";
 import {clearItem} from "../../../entities/Pizza/model/reducers/cartSlice";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";

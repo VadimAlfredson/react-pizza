@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {getCartInitialState} from "../../../../utils/getCartState";
+import {getCartInitialState} from "../getCartState";
 import {PizzaCartType} from "../types";
 
 

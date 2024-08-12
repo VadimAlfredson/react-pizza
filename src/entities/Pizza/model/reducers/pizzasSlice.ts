@@ -1,5 +1,5 @@
 import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Pagination} from "../../../../utils/Pagination";
+import {Pagination} from "../../../../features/Paginator/model/Pagination";
 import {fetchPizzas} from "../../../../pages/main/api/getPizzas";
 import {PizzaItemType} from "../types";
 

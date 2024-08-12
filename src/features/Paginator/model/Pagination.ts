@@ -1,4 +1,4 @@
-import {PizzaItemType} from "../entities/Pizza/model/types";
+import {PizzaItemType} from "../../../entities/Pizza/model/types";
 
 export const Pagination = (items: Array<PizzaItemType>, currentPage= 1, countToPage = 8) => {
   const totalItemsCount = items.length

@@ -6,8 +6,8 @@ import Sort from "../../../features/Sort/ui/Sort";
 import PizzaSkeleton from "../../../shared/Skeleton/SkeletonPizzaItem";
 import PizzaItem from "../../../entities/Pizza/ui/Pizzas/PizzaItem";
 import '../../../app/App/App.css';
-import '../../../scss/_variables.scss'
-import '../../../scss/app.scss'
+import '../../../app/Styles/scss/_variables.scss'
+import '../../../app/Styles/scss/app.scss'
 import Paginator from "../../../features/Paginator/ui/Paginator";
 import {setOrder, setParams} from "../../../app/Redux/Slices/filterSlice";
 import {useNavigate} from "react-router-dom";

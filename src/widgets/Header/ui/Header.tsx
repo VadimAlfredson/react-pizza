@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../../scss/_variables.scss'
-import '../../../scss/app.scss'
+import '../../../app/Styles/scss/_variables.scss'
+import '../../../app/Styles/scss/app.scss'
 import {Link, useLocation} from "react-router-dom";
 import Search from "../../../features/Search/ui/Search";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";

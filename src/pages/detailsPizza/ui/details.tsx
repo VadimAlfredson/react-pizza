@@ -1,22 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ParametersSelectionBlock from "../../../features/ParametersSelectionBlock/ui/ParametersSelectionBlock";
 import ButtonAddItem from "../../../features/ButtonAddItem/ui/buttonAddItem";
 import DetailsPizza from "../../../entities/Pizza/ui/PizzaDetails/DetailsPizza";
 import {useParams} from "react-router-dom";
-import {useAppSelector} from "../../../app/Redux/Types/types";
-import {statusDetailsSelector} from "../../../entities/Pizza/model/selectors";
+import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import SkeletonPizzaDetails from "../../../shared/Skeleton/SkeletonPizzaDetails";
+import {fetchPizzaDetails} from "../../../entities/Pizza/api/getPizza";
+import {clearInfoPizza} from "../../../entities/Pizza/model/reducers/detailsPizzaReducer";
+import {idSelector, statusSelector} from "../model/selectors";
 
 const Details: React.FC = () => {
     const {id} = useParams()
-    const status = useAppSelector(statusDetailsSelector)
+    const status = useAppSelector(statusSelector)
+    const dispatch = useAppDispatch()
+    const idPizza = useAppSelector(idSelector)
+
+    useEffect(() => {
+        if (id !== String(idPizza)) {
+            dispatch(fetchPizzaDetails(id))
+        }
+        return () => {
+            dispatch(clearInfoPizza())
+        }
+    }, [id])
     return (<div className='container--info'>
-        {status === 'pending' ? <SkeletonPizzaDetails /> :
-            status === 'success' ? <DetailsPizza ParametersSelectionBlock={ParametersSelectionBlock} ButtonAddItem={ButtonAddItem} id={id}/> :
-                <div>Сломалось что-то...</div>
-}
+            {status === 'pending' ? <SkeletonPizzaDetails/>
+                : status === 'success' ? <DetailsPizza ParametersSelectionBlock={ParametersSelectionBlock}
+                                                       ButtonAddItem={ButtonAddItem}
+                                                       id={id}/>
+                    : <div>Сломалось что-то...</div>
+            }
         </div>
-);
+    );
 }
 export default Details;
 

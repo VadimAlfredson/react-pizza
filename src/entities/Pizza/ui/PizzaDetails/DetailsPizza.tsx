@@ -24,15 +24,6 @@ const DetailsPizza: React.FC<{ ButtonAddItem: any, ParametersSelectionBlock: any
 
     const count = pizzaCount(id, pizzasInCart)
 
-    useEffect(() => {
-        if (id !== String(detailsPizza.id)) {
-            dispatch(fetchPizzaDetails(id))
-        }
-        return () => {
-            dispatch(clearInfoPizza())
-        }
-    }, [id])
-
     return (
 
             <div className="info-pizza-block">
