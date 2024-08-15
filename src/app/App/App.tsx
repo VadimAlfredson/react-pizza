@@ -1,16 +1,15 @@
 import './App.css';
 import '../Styles/scss/_variables.scss'
 import '../Styles/scss/app.scss'
-import Header from "../../widgets/Header/ui/Header";
+import Header from "../../widgets/header/ui/header";
 
 import {Route, Routes} from "react-router-dom";
-
-import NotFount from "../../pages/notFound/ui/NotFount";
 import {lazy, Suspense} from "react";
-import Main from "../../pages/main/ui/Main";
-import Details from "../../pages/detailsPizza/ui/details";
+import Main from "../../pages/main/ui/main";
+import {NotFount} from "../../pages/notFound/ui/not-fount";
+import {Details} from "../../pages/detailsPizza/ui/details";
 
-const CartLazy = lazy(() => import("../../pages/cart/ui/Cart"))
+const CartLazy = lazy(() => import("../../pages/cart/ui/cart").then(module => ({default: module.Cart})))
 
 function App() {
     return (
