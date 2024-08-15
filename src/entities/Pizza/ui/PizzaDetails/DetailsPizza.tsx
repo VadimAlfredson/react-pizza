@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {pizzaCount} from "../../model/pizzaCount";
-import {useAppDispatch, useAppSelector} from "../../../../app/Redux/Types/types";
+import {useAppSelector} from "../../../../app/Redux/Types/types";
 import {detailsPizzaSelector, pizzasInCartSelector, statusDetailsSelector} from "../../model/selectors";
-import {fetchPizzaDetails} from "../../api/getPizza";
-import {clearInfoPizza} from "../../model/reducers/detailsPizzaReducer";
 import Skeleton from "../../../../shared/Skeleton/SkeletonPizzaItem";
 import ButtonAddItem from "../../../../features/ButtonAddItem/ui/buttonAddItem";
 
@@ -12,7 +10,6 @@ const DetailsPizza: React.FC<{ ButtonAddItem: any, ParametersSelectionBlock: any
                                                                                                                    ButtonAddItem,
                                                                                                                    id
                                                                                                                }) => {
-    const dispatch = useAppDispatch()
 
     const detailsPizza = useAppSelector(detailsPizzaSelector)
 
@@ -26,31 +23,31 @@ const DetailsPizza: React.FC<{ ButtonAddItem: any, ParametersSelectionBlock: any
 
     return (
 
-            <div className="info-pizza-block">
-                {status === 'success' ? <>
-                    <div className="img-block">
-                        <img
-                            className={'img'}
-                            src={detailsPizza.imageUrl}
-                            alt="Pizza"
-                            onError={({currentTarget}) => {
-                                currentTarget.onerror = null; // prevents looping
-                                currentTarget.src = 'https://kuponoed.ru/wp-content/uploads/2020/05/3sv9dsvsd.png';
-                            }}
-                        />
-                    </div>
+        <div className="info-pizza-block">
+            {status === 'success' ? <>
+                <div className="img-block">
+                    <img
+                        className={'img'}
+                        src={detailsPizza.imageUrl}
+                        alt="Pizza"
+                        onError={({currentTarget}) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = 'https://kuponoed.ru/wp-content/uploads/2020/05/3sv9dsvsd.png';
+                        }}
+                    />
+                </div>
 
-                    <div className='info-side'><h2 className="title">{detailsPizza.name}</h2>
-                        <div><h4>Ингридиенты: </h4>  {detailsPizza.ingredients.join(", ")}</div>
-                        <ParametersSelectionBlock setActiveParameters={setActiveParameters} pizza={detailsPizza}/>
-                        <div className="pizza-block__bottom">
-                            <div className="pizza-block__price">от {detailsPizza.price[activeSize]} ₽</div>
-                            <ButtonAddItem pizza={detailsPizza} activeType={activeType} activeSize={activeSize}
-                                           count={count}/>
-                        </div>
+                <div className='info-side'><h2 className="title">{detailsPizza.name}</h2>
+                    <div><h4>Ингридиенты: </h4>  {detailsPizza.ingredients.join(", ")}</div>
+                    <ParametersSelectionBlock setActiveParameters={setActiveParameters} pizza={detailsPizza}/>
+                    <div className="pizza-block__bottom">
+                        <div className="pizza-block__price">от {detailsPizza.price[activeSize]} ₽</div>
+                        <ButtonAddItem pizza={detailsPizza} activeType={activeType} activeSize={activeSize}
+                                       count={count}/>
                     </div>
-                </> : <Skeleton/>}
-            </div>
+                </div>
+            </> : <Skeleton/>}
+        </div>
     );
 };
 
