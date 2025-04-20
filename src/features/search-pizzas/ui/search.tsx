@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import styles from './search.module.scss'
-import {setSearch, clearSearch} from "../../../app/Redux/Slices/filterSlice";
 import {useDebounce} from "../../../shared/lib/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {categorySelector, searchSelector, statusSelector} from "../model/selectors";
+import {clearSearch, setSearch} from "../model/search-slice";
 
 export const Search: React.FC = () => {
     const dispatch = useAppDispatch()

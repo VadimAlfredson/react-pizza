@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {pizzaCount} from "../../../cart/model/read-one/pizza-count";
 import {useAppSelector} from "../../../../app/Redux/Types/types";
-import {detailsPizzaSelector, statusDetailsSelector} from "../../model/readOne/selectors";
+import {detailsPizzaSelector, statusDetailsSelector} from "../../model/read-one/selectors";
 import Skeleton from "../../../../shared/ui/Skeleton/SkeletonPizzaItem";
 import {pizzasInCartSelector} from "../../../cart/model/read-one/selectors";
 

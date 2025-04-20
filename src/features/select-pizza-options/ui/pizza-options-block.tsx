@@ -2,9 +2,7 @@ import React, {memo, useEffect, useState} from 'react';
 import {PizzaItemType} from "../../../entities/pizza/model/types";
 import {typesDough} from "../../../entities/pizza/model/constants";
 
-export const SelectPizzaOptions: React.FC<{pizza: PizzaItemType, setActiveParameters: ([]) => void}> = memo(({pizza, setActiveParameters}) => {
-
-    console.log(pizza)
+export const PizzaOptionsBlock: React.FC<{pizza: PizzaItemType, setActiveParameters: ([]) => void}> = memo(({pizza, setActiveParameters}) => {
 
     const [activeType, setActiveType] = useState<number>(0)
     const [activeSize, setActiveSize] = useState<number>(0)

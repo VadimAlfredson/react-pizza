@@ -1,4 +1,4 @@
-import {RootState} from "../../../app/Redux/Store";
+import {RootState} from "../../../../app/Redux/Store";
 
 
 export const totalCountSelector = (state: RootState) => state.pizzas.totalCount

@@ -3,11 +3,11 @@ import '../../../app/Styles/scss/_variables.scss'
 import '../../../app/Styles/scss/app.scss'
 import {Link, useLocation} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
-import {clearSearch} from "../../../app/Redux/Slices/filterSlice";
 import {countSelector, priceSelector} from "../model/selectors";
 import PizzaImg from "../../../shared/ui/imges/pizzaImg";
 import {Search} from "../../../features/search-pizzas/ui/search";
 import {CartIcon} from "../../../shared/ui/icons/cartIcon";
+import {clearSearch} from "../../../features/search-pizzas/model/search-slice";
 
 const Header: React.FC = () => {
 

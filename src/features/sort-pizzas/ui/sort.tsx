@@ -2,10 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../../../app/Styles/scss/_variables.scss'
 import '../../../app/Styles/scss/app.scss'
 import '../ui/sort.scss'
-import {setSort} from "../../../app/Redux/Slices/filterSlice";
+
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
-import {orderSelector} from "../model/selectors";
+import {orderSelector, sortSelector} from "../model/selectors";
 import {SortIcon} from "../../../shared/ui/icons/sortIcon";
+import {setSort} from "../model/sort-slice";
 
 export const Sort: React.FC<{ Order: () => void }> = (props) => {
     const [open, setOpen] = useState<boolean>(false)
@@ -14,6 +15,7 @@ export const Sort: React.FC<{ Order: () => void }> = (props) => {
     const sortRef = useRef<HTMLDivElement | null>(null)
 
     const order = useAppSelector(orderSelector)
+    const sort = useAppSelector(sortSelector)
 
     const dispatch = useAppDispatch()
 

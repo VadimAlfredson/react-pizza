@@ -1,7 +1,7 @@
 import {ActionReducerMapBuilder, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Pagination} from "../../../../features/pagination/model/pagination";
 import {fetchPizzas} from "../../api/get-pizzas";
 import {PizzasStateType} from "../types";
+import {pagination} from "../../../../shared/pagination/lib/pagination";
 
 
 const initialState: PizzasStateType = {
@@ -17,13 +17,13 @@ const pizzasSlice = createSlice({
     initialState,
     reducers: {
         getPizzasToPage: (state, action: PayloadAction<number>) => {
-            state.pizzasToCurrentPage = Pagination(state.pizzas, action.payload)
+            state.pizzasToCurrentPage = pagination(state.pizzas, action.payload)
             state.currentPage = action.payload
         },
         getSearchPizza: (state, action: PayloadAction<string>) => {
             const searchResult = state.pizzas.filter((pizza, index) => pizza.name.includes(action.payload))
             state.pizzas = searchResult
-            state.pizzasToCurrentPage = Pagination(searchResult, 1)
+            state.pizzasToCurrentPage = pagination(searchResult, 1)
             state.currentPage = 1
             state.totalCount = Math.ceil(searchResult.length / 8)
         }
@@ -34,7 +34,7 @@ const pizzasSlice = createSlice({
                 fetchPizzas.fulfilled, (state, action) => {
                     state.pizzas = action.payload
                     state.status = 'success'
-                    state.pizzasToCurrentPage = Pagination(action.payload, 1)
+                    state.pizzasToCurrentPage = pagination(action.payload, 1)
                     state.currentPage = 1
                     state.totalCount = Math.ceil(action.payload.length / 8)
                 })

@@ -8,6 +8,14 @@ import {PizzaItemType} from "../../model/types";
 import {PizzaCartType} from "../../../cart/model/read-one/types";
 import {pizzasInCartSelector} from "../../../cart/model/read-one/selectors";
 
+
+const state = {
+    '1': {
+        typeTesto: 'tradicionnoe',
+        size: 'M'
+    }
+}
+
 export const PizzaItem: React.FC<{pizza: PizzaItemType, ButtonAddItem: any, ParametersSelectionBlock: any}> = ({pizza, ButtonAddItem, ParametersSelectionBlock}) => {
 
     const [[activeType, activeSize], setActiveParameters] = useState<[number, number]>([0, 0])

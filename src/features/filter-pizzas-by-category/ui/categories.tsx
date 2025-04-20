@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import '../../../app/Styles/scss/_variables.scss'
 import '../../../app/Styles/scss/app.scss'
-import {setCategory} from "../../../app/Redux/Slices/filterSlice";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import {categorySelector, searchSelector} from "../model/selectors";
 import {categories} from "../model/categories";
+import {setCategory} from "../model/categories-slice";
 
 export const Categories: React.FC = () => {
     const category = useAppSelector(categorySelector)

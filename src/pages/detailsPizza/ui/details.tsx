@@ -3,10 +3,10 @@ import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../app/Redux/Types/types";
 import SkeletonPizzaDetails from "../../../shared/ui/Skeleton/SkeletonPizzaDetails";
 import {fetchPizzaDetails} from "../../../entities/pizza/api/get-pizza";
-import {clearInfoPizza} from "../../../entities/pizza/model/readOne/details-pizza-slice";
+import {clearInfoPizza} from "../../../entities/pizza/model/read-one/details-pizza-slice";
 import {idSelector, statusSelector} from "../model/selectors";
 import {DetailsPizza} from "../../../entities/pizza/ui/pizza-details/details-pizza";
-import {SelectPizzaOptions} from "../../../features/select-pizza-options/ui/select-pizza-options";
+import {PizzaOptionsBlock} from "../../../features/select-pizza-options/ui/pizza-options-block";
 import {Button} from "../../../features/add-pizza-to-cart/ui/button";
 
 export const Details: React.FC = () => {
@@ -25,7 +25,7 @@ export const Details: React.FC = () => {
     }, [id])
     return (<div className='container--info'>
             {status === 'pending' ? <SkeletonPizzaDetails/>
-                : status === 'success' ? <DetailsPizza ParametersSelectionBlock={SelectPizzaOptions}
+                : status === 'success' ? <DetailsPizza ParametersSelectionBlock={PizzaOptionsBlock}
                                                        ButtonAddItem={Button}
                                                        id={id}/>
                     : <div>Сломалось что-то...</div>
